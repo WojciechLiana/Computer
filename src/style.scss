@@ -1,0 +1,25 @@
+.computer {
+  display: flex;
+  flex-direction: column;
+
+  .menu {
+    width: 100%;
+  }
+
+  .content {
+
+    display: flex;
+    flex-direction: row;
+
+    .form {
+      flex: 3;
+      background-color: lightblue;
+    }
+
+    .cart {
+      background-color: lightcoral;
+      flex: 1;
+    }
+  }
+
+}
