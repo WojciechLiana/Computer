@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import "./style.scss";
+import database from './database.js'
 
 function Computer() {
     return (
@@ -46,6 +47,7 @@ function Content() {
         <div className='content'>
             <Form database={database} partsID={partsID} hooks={hooks} names={names}/>
             <Cart database={database} partsID={partsID} hooks={hooks}/>
+
         </div>
     );
 }
@@ -79,7 +81,8 @@ function Cart({database, partsID, hooks}) {
         <div className='cart'>
             <NumberOfSelectedParts parts={partsID}/>
             {database.map((element, id) => (<div key={id}>
-            <span>{element[partsID[id]]}</span><RemoveFromCartButton partsID={partsID} onClick={(e) => hooks[id](e)}/>
+                <span>{element[partsID[id]]}</span><RemoveFromCartButton partsID={partsID}
+                                                                         onClick={(e) => hooks[id](e)}/>
             </div>))}
             <Price part={database} partId={partsID}/>
         </div>
@@ -92,20 +95,20 @@ function RemoveFromCartButton({onClick, partsID}) {
     );
 }
 
-function Price({part, partId}){
+function Price({part, partId}) {
 
-    const price2 = partId.map((element, id)=>(element == 0 ? 0 : part[id][element][1])).reduce((acc, curr)=> acc + curr);
+    const price2 = partId.map((element, id) => (element == 0 ? 0 : part[id][element][1])).reduce((acc, curr) => acc + curr);
 
-    return(
+    return (
         <div>Total price: {price2} zl</div>
     );
 }
 
-function NumberOfSelectedParts({parts}){
+function NumberOfSelectedParts({parts}) {
 
-    const numberOfParts = parts.filter(element=>element>0).length;
+    const numberOfParts = parts.filter(element => element > 0).length;
 
-    return(
+    return (
         <div>Parts in cart: {numberOfParts}</div>
     );
 }

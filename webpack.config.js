@@ -7,7 +7,7 @@ module.exports = {
     watchOptions: {
         ignored: /node_modules/
     },
-    plugins: [new HtmlWebPackPlugin()],
+    plugins: [new HtmlWebPackPlugin({template: 'index.html'})],
     devServer: {
         stats: "errors-only",
         overlay: true,
@@ -40,6 +40,10 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader',],
+            },
+            {
+                test: /\.exec\.js$/,
+                use: ['script-loader']
             },
         ]
     },
