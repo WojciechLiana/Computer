@@ -1,12 +1,12 @@
-const processorList = [['Choose part ', ''], ['intel i3 ', 1000], ['intel i5 ', 1200], ['intel i7 ', 1500], ['intel i9 ', 1900], ['AMD K5 ', 1000], ['AMD K6 ', 1200],
-    ['AMD K7 ', 1500], ['AMD K8 ', 1900]];
-const cardsList = [['Choose part ', ''], ['GeForce 700 ', 700], ['GeForce 800 ', 800], ['GeForce 900 ', 900], ['GeForce 1000 ', 1000], ['Radeon Rx 2xx ', 700],
-    ['Radeon Rx 3xx ', 800], ['Radeon Rx 4xx ', 900], ['Radeon Rx 5xx ', 1000]];
-const ramList = [['Choose part ', ''], ['4 GB ', 200], ['8 GB ', 600], ['16 GB ', 1000]];
-const powerSupplyList = [['Choose part ', ''], ['500 W ', 200], ['600 W ', 300], ['700 W ', 400], ['800 W ', 500], ['1000 W ', 600]];
-const motherboardList = [['Choose part ', ''], ['MSI ', 500], ['Gigabyte ', 600], ['Asus ', 500], ['ASRock ', 600]];
-const hardDriveList = [['Choose part ', ''], ['200 GB ', 400], ['500 GB ', 500], ['800 GB ', 600], ['1TB ', 700]];
+const processorList = [{name:'intel i3', price: 1000}, {name:'intel i5', price: 1200}, {name:'intel i7', price: 1500}, {name:'intel i9', price: 1900},
+    {name:'AMD K5', price: 1000}, {name:'AMD K6', price: 1300},{name:'AMD K7', price: 1500},{name:'AMD K8', price: 1900}];
+const cardsList = [{name: 'GeForce 700', price: 700}, {name: 'GeForce 800', price: 800}, {name: 'GeForce 900', price: 900}, {name: 'GeForce 1000', price: 1000},
+    {name: 'Radeon Rx 2xx', price: 700}, {name: 'Radeon Rx 3xx', price: 800}, {name: 'Radeon Rx 4xx', price: 900}, {name: 'Radeon Rx 5xx', price: 1000}];
+const ramList = [{name: '4 GB', price: 200}, {name: '8 GB', price: 600}, {name: '16 GB', price: 1000}];
+const powerSupplyList = [{name: '500 W', price: 200}, {name: '600 W', price: 300}, {name: '700 W', price: 400}, {name: '800 W', price: 500}, {name: '1000 W', price: 600}];
+const motherboardList = [{name: 'MSI', price: 600}, {name: 'Gigabyte', price: 600}, {name: 'Asus', price: 500}, {name: 'ASRock', price: 500}];
+const hardDriveList = [{name: '200 GB', price: 400}, {name: '500 GB', price: 500}, {name: '800 GB', price: 600}, {name: '1TB', price: 700}];
 
-const database = [processorList, cardsList, ramList, powerSupplyList, motherboardList, hardDriveList];
+const database2 = [processorList, cardsList, ramList, powerSupplyList, motherboardList, hardDriveList];
 
-export default database;
+export default database2;
