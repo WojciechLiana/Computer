@@ -23,12 +23,12 @@ function Content() {
 
     const database = [...database2];
 
-    const [processor, setProcessor] = React.useState(0);
-    const [ram, setRam] = React.useState(0);
-    const [graphic, setGraphic] = React.useState(0);
-    const [power, setPower] = React.useState(0);
-    const [motherboard, setMotherboard] = React.useState(0);
-    const [hardDrive, setHardDrive] = React.useState(0);
+    const [processor, setProcessor] = React.useState(-1);
+    const [ram, setRam] = React.useState(-1);
+    const [graphic, setGraphic] = React.useState(-1);
+    const [power, setPower] = React.useState(-1);
+    const [motherboard, setMotherboard] = React.useState(-1);
+    const [hardDrive, setHardDrive] = React.useState(-1);
 
     const partsID = [processor, ram, graphic, power, motherboard, hardDrive];
     const hooks = [setProcessor, setRam, setGraphic, setPower, setMotherboard, setHardDrive];
@@ -36,7 +36,7 @@ function Content() {
 
     function getSelectedParts(database, partsID) {
         const selectedParts = partsID.map((element, id) =>
-            element == 0 ? null : {name: database[id][element].name, price: database[id][element].price});
+            element == -1 ? null : {name: database[id][element].name, price: database[id][element].price});
 
         return selectedParts;
     }
@@ -65,6 +65,7 @@ function Form({database, partsID, hooks, partsName}) {
 function ComputerPart({partsList, partsID, hook}) {
     return (
         <select value={partsID} onChange={(e) => hook(e.target.value)}>
+            <option value={-1}>Choose part</option>
             {partsList.map((part, id) =>
                 <option key={id} value={id}>{part.name}</option>
             )}
@@ -108,7 +109,7 @@ function PartsInCart({selectedParts, hooks, partsID, partsName}){
 function RemoveFromCartButton({onClick}) {
 
     return (
-        <button onClick={()=>onClick(0)}>X</button>
+        <button onClick={()=>onClick(-1)}>X</button>
     );
 }
 
