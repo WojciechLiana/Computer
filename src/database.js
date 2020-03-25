@@ -7,6 +7,6 @@ const powerSupplyList = [{name: '500 W', price: 200}, {name: '600 W', price: 300
 const motherboardList = [{name: 'MSI', price: 600}, {name: 'Gigabyte', price: 600}, {name: 'Asus', price: 500}, {name: 'ASRock', price: 500}];
 const hardDriveList = [{name: '200 GB', price: 400}, {name: '500 GB', price: 500}, {name: '800 GB', price: 600}, {name: '1TB', price: 700}];
 
-const database2 = [processorList, cardsList, ramList, powerSupplyList, motherboardList, hardDriveList];
+const exportedDatabase = [processorList, cardsList, ramList, powerSupplyList, motherboardList, hardDriveList];
 
-export default database2;
+export default exportedDatabase;

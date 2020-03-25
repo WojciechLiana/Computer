@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./style.scss";
-import database2 from './database.js'
+import exportedDatabase from './database.js'
 
 function Computer() {
     return (
@@ -21,43 +21,44 @@ function Menu() {
 
 function Content() {
 
-    const database = [...database2];
+    const database = [...exportedDatabase];
 
-    const [processor, setProcessor] = React.useState(-1);
-    const [ram, setRam] = React.useState(-1);
-    const [graphic, setGraphic] = React.useState(-1);
-    const [power, setPower] = React.useState(-1);
-    const [motherboard, setMotherboard] = React.useState(-1);
-    const [hardDrive, setHardDrive] = React.useState(-1);
+    const [selectedProcessorId, setProcessorId] = React.useState(-1);
+    const [selectedRamId, setRamId] = React.useState(-1);
+    const [selectedGraphicId, setGraphicId] = React.useState(-1);
+    const [selectedPowerId, setPowerId] = React.useState(-1);
+    const [selectedMotherboardId, setMotherboardId] = React.useState(-1);
+    const [selectedHardDriveId, setHardDriveId] = React.useState(-1);
 
-    const partsID = [processor, ram, graphic, power, motherboard, hardDrive];
-    const hooks = [setProcessor, setRam, setGraphic, setPower, setMotherboard, setHardDrive];
-    const names = ['Processor', 'Graphic card', 'RAM', 'Power supply', 'Motherboard', 'Hard drive'];
+    const idsOfSelectedParts = [selectedProcessorId, selectedRamId, selectedGraphicId, selectedPowerId, selectedMotherboardId, selectedHardDriveId];
+    const setIdFunctions = [setProcessorId, setRamId, setGraphicId, setPowerId, setMotherboardId, setHardDriveId];
+    const partsName = ['Processor', 'Graphic card', 'RAM', 'Power supply', 'Motherboard', 'Hard drive'];
 
-    function getSelectedParts(database, partsID) {
-        const selectedParts = partsID.map((element, id) =>
-            element == -1 ? null : {name: database[id][element].name, price: database[id][element].price});
+    function getSelectedParts(database, idsOfSelectedParts) {
 
+        const selectedParts = idsOfSelectedParts.map((selectedId, id) =>
+            selectedId == -1 ? null : {name: database[id][selectedId].name, price: database[id][selectedId].price, id:id});
         return selectedParts;
     }
 
-    const selectedParts = getSelectedParts(database, partsID);
+    const selectedParts = getSelectedParts(database, idsOfSelectedParts);
 
     return (
-
         <div className='content'>
-            <Form database={database} partsID={partsID} hooks={hooks} partsName={names}/>
-            <Cart selectedParts={selectedParts} partsID={partsID} hooks={hooks} partsName={names}/>
+            <Form database={database} partsID={idsOfSelectedParts} handleIdChanges={setIdFunctions}
+                  partsName={partsName}/>
+            <Cart selectedParts={selectedParts} partsID={idsOfSelectedParts} handleIdChanges={setIdFunctions}
+                  partsName={partsName}/>
         </div>
     );
 }
 
-function Form({database, partsID, hooks, partsName}) {
+function Form({database, partsID, handleIdChanges, partsName}) {
 
     return (
         <form className='form'>
             {partsName.map((partName, id) => <div key={id}>Choose {partName} for your PC <ComputerPart
-                partsList={database[id]} partsID={partsID[id]} hook={hooks[id]}/></div>)}
+                partsList={database[id]} partsID={partsID[id]} hook={handleIdChanges[id]}/></div>)}
         </form>
     );
 }
@@ -73,7 +74,7 @@ function ComputerPart({partsList, partsID, hook}) {
     );
 }
 
-function Cart({selectedParts, partsID, hooks, partsName}) {
+function Cart({selectedParts, partsID, handleIdChanges, partsName}) {
 
     function calculatePrice(selectedParts) {
         const price = selectedParts.map(part => part ? part.price : 0).reduce((acc, curr) => acc + curr);
@@ -92,16 +93,18 @@ function Cart({selectedParts, partsID, hooks, partsName}) {
     return (
         <div className='cart'>
             <NumberOfSelectedParts numberOfParts={numberOfParts}/>
-            <PartsInCart selectedParts={selectedParts} hooks={hooks} partsID={partsID} partsName={partsName}/>
-            <Price price={price}/>
+            <PartsInCart selectedParts={selectedParts} hooks={handleIdChanges} partsName={partsName}/>
+            <TotalPrice price={price}/>
         </div>
     );
 }
 
-function PartsInCart({selectedParts, hooks, partsID, partsName}){
-    return(
+function PartsInCart({selectedParts, hooks, partsName}) {
+    return (
         <div>
-            {selectedParts.map((element,id)=>element ? <div key={id}>{partsName[id]}: {element.name } <RemoveFromCartButton onClick={(e) => hooks[id](e)}/></div>: null)}
+            {selectedParts.map((element, id) => element ?
+                <div key={id}>{partsName[id]}: {element.name} <RemoveFromCartButton onClick={(e) => hooks[id](e)}/>
+                </div> : null)}
         </div>
     );
 }
@@ -109,11 +112,11 @@ function PartsInCart({selectedParts, hooks, partsID, partsName}){
 function RemoveFromCartButton({onClick}) {
 
     return (
-        <button onClick={()=>onClick(-1)}>X</button>
+        <button onClick={() => onClick(-1)}>X</button>
     );
 }
 
-function Price({price}) {
+function TotalPrice({price}) {
 
     return (
         <div>Total price: {price} zł</div>
