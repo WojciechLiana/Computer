@@ -3,21 +3,40 @@ import "./style.scss";
 import database from './database.json';
 
 function Computer() {
+
+    const [menuOption, setMenuOption] = React.useState(1);
+
     return (
         <div className='computer'>
-            <Menu/>
+            <Menu setMenuOption={(e)=>setMenuOption(e)}/>
             <Content/>
         </div>
     );
 }
 
-function Menu() {
+function Menu({setMenuOption}) {
     return (
         <div className='menu'>
-            Menu
+            <MenuButton id={1} setMenuOption={(e)=>setMenuOption(e)} label='Home page'/>
+            <MenuButton id={2} setMenuOption={(e)=>setMenuOption(e)} label='Order PC'/>
+            <MenuButton id={3} setMenuOption={(e)=>setMenuOption(e)} label='About us'/>
+            <MenuButton id={4} setMenuOption={(e)=>setMenuOption(e)} label='Contact'/>
         </div>
     );
 }
+
+function MenuButton({label, id, setMenuOption}) {
+    return(
+        <button onClick={()=>setMenuOption(id)}>{label}</button>
+    );
+}
+
+const HomePage = ()=><div>Best Computer Shop</div>
+
+const Map = ()=> <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7242.336700790632!2d20.01624270837917!3d50.07593813738488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4716453b881ad1c3%3A0x795b70441e44171f!2zQmllxYRjenlja2EsIEtyYWvDs3c!5e0!3m2!1spl!2spl!4v1585232836955!5m2!1spl!2spl"
+    width="600" height="450" frameBorder="0" allowFullScreen="" aria-hidden="false"
+    tabIndex="0"></iframe>
 
 function Content() {
     const [selectedProcessorId, setProcessorId] = React.useState(-1);
