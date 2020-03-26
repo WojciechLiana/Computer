@@ -31,21 +31,12 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                use: [
-                    {
-                        loader: "html-loader"
-                    }
-                ]
+                use: "html-loader"
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: ['style-loader', 'css-loader', 'sass-loader',],
-            },
-            {
-                test: /\.exec\.js$/,
-                use: ['script-loader']
-            },
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            }
         ]
     },
-
 };
