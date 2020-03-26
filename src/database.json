@@ -1,5 +1,4 @@
-{
-  "processor": [
+[[
     {"name": "intel i3", "price": 1000},
     {"name": "intel i5", "price": 1200},
     {"name": "intel i7", "price": 1500},
@@ -8,8 +7,7 @@
     {"name": "AMD K6", "price": 1300},
     {"name": "AMD K7", "price": 1500},
     {"name": "AMD K8", "price": 1900}
-  ],
-  "card": [
+  ], [
     {"name": "GeForce 700", "price": 700},
     {"name": "GeForce 800", "price": 800},
     {"name": "GeForce 900", "price": 900},
@@ -18,29 +16,25 @@
     {"name": "Radeon Rx 3xx", "price": 800},
     {"name": "Radeon Rx 4xx", "price": 900},
     {"name": "Radeon Rx 5xx", "price": 1000}
-  ],
-  "ram": [
+  ], [
     {"name": "4 GB", "price": 200},
     {"name": "8 GB", "price": 600},
     {"name": "16 GB", "price": 1000}
-  ],
-  "powerSupply": [
+  ], [
     {"name": "500 W", "price": 200},
     {"name": "600 W", "price": 300},
     {"name": "700 W", "price": 400},
     {"name": "800 W", "price": 500},
     {"name": "1000 W", "price": 600}
-  ],
-  "motherboard": [
+  ], [
     {"name": "MSI", "price": 600},
     {"name": "Gigabyte", "price": 600},
     {"name": "Asus", "price": 500},
     {"name": "ASRock", "price": 500}
-  ],
-  "hardDrive": [
+  ], [
     {"name": "200 GB", "price": 400},
     {"name": "500 GB", "price": 500},
     {"name": "800 GB", "price": 600},
     {"name": "1TB", "price": 700}
   ]
-}
+]
