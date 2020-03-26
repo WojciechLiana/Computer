@@ -9,7 +9,10 @@ function Computer() {
     return (
         <div className='computer'>
             <Menu setMenuOption={(e) => setMenuOption(e)}/>
-            <Content/>
+            <HomePage menuOption={menuOption}/>
+            <Content menuOption={menuOption}/>
+            <AboutUs menuOption={menuOption}/>
+            <ContactUs menuOption={menuOption}/>
         </div>
     );
 }
@@ -31,29 +34,27 @@ function MenuButton({label, id, setMenuOption}) {
     );
 }
 
-const HomePage = () => <div>Best Computer Shop</div>
+const HomePage = ({menuOption}) => menuOption == 1 ? <div>Best Computer Shop</div> : null;
 
-const AboutUs = () => <div>Wocjiech Liana - React Developer</div>
+const AboutUs = ({menuOption}) => menuOption == 3 ? <div>Wojciech Liana - React Developer</div> : null;
 
-function ContactUs() {
-    return(
-        <div>
-            <Phone phone={508539222} />
-            <Email email='wojtek.liana@gmail.com' />
-            <Map />
-        </div>
-    );
-}
+const ContactUs = ({menuOption}) => menuOption == 4 ?
+    <div>
+        <Phone phone={508539222}/>
+        <Email email='wojtek.liana@gmail.com'/>
+        <Map/>
+    </div> : null;
 
-const Phone = ({phone}) => {<div>Phone number: {phone}</div>}
-const Email = ({email}) => {<div>Email adress: {email}</div>}
+
+const Phone = ({phone}) => <div>Phone number: {phone}</div>;
+const Email = ({email}) => <div>Email adress: {email}</div>;
 
 const Map = () => <iframe
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7242.336700790632!2d20.01624270837917!3d50.07593813738488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4716453b881ad1c3%3A0x795b70441e44171f!2zQmllxYRjenlja2EsIEtyYWvDs3c!5e0!3m2!1spl!2spl!4v1585232836955!5m2!1spl!2spl"
     width="600" height="450" frameBorder="0" allowFullScreen="" aria-hidden="false"
     tabIndex="0"></iframe>
 
-function Content() {
+function Content({menuOption}) {
     const [selectedProcessorId, setProcessorId] = React.useState(-1);
     const [selectedRamId, setRamId] = React.useState(-1);
     const [selectedGraphicId, setGraphicId] = React.useState(-1);
@@ -80,17 +81,20 @@ function Content() {
             .filter(element => element);
     }
 
-    return (
-        <div className='content'>
-            <Form database={database}
-                  partsID={idsOfSelectedParts}
-                  handleIdChanges={setIdFunctions}
-                  partsName={partsName}/>
-            <Cart
-                selectedParts={getSelectedParts(database, idsOfSelectedParts)}
-                handleIdChanges={setIdFunctions} partsName={partsName}/>
-        </div>
-    );
+    if (menuOption == 2) {
+        return (
+            <div className='content'>
+                <Form database={database}
+                      partsID={idsOfSelectedParts}
+                      handleIdChanges={setIdFunctions}
+                      partsName={partsName}/>
+                <Cart
+                    selectedParts={getSelectedParts(database, idsOfSelectedParts)}
+                    handleIdChanges={setIdFunctions} partsName={partsName}/>
+            </div>
+        );
+    }
+    return null;
 }
 
 function Form({database, partsID, handleIdChanges, partsName}) {
